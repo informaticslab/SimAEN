@@ -1,0 +1,184 @@
+During development of the website it became necessary to relabel several of the parameters in a more user-friendly way. The mapping from user-friendly name to model variable name(s) is below.
+
+Two inputs deserve special attention because under the hood they each are implemented with a PAIR of model parameters:
+Personal interaction level and Risk settings.
+
+  starting_cases
+    Label: Number of starting cases
+
+  p_test_given_call
+    Label: Probability of testing after PH call
+
+  p_test_given_notification
+    Label: Probability of testing after EN
+
+  test_delay
+    Label: Test processing time
+
+  p_running_app
+    Label: EN adoption rate
+
+  p_app_detects_generator and false_discovery_rate
+    Label: Risk settings
+
+  p_upload_key_given_positive_test
+    Label: Percent sharing diagnosis
+
+  n_contact_tracers
+    Label: Number of contact tracers
+
+  mean_new_cases and mean_total_contacts
+    Label: Personal interaction level
+
+  p_maximal_restriction_given_ph_call
+    Label: Quarantine compliance after CT call
+
+  p_maximal_restriction_given_aen_notification
+    Label: Quarantine compliance after EN
+
+  p_vaccinated
+    Label: Population vaccination level
+
+  p_mask_given_norm
+    Label: Population mask-wearing level
+
+  key_upload_requires_call
+    Label: Sharing diagnosis requires interacting with PH
+
+Likewise for the fixed parameters:
+
+
+  end_day
+   Label: 'End day'
+
+  max_num_current_cases
+    Label: 'Max current cases'
+
+  mean_latent_period
+    Label: 'Mean latent period'
+
+  sd_latent_period
+    Label: 'Latent period standard deviation'
+
+  mean_incubation_period
+    Label: 'Mean incubation period'
+
+  sd_incubation_period
+    Label: 'Incubation period standard deviation'
+
+  recovery_length
+    Label: 'Recovery length'
+
+  p_asymptomatic_rate
+    Label: 'Asymptomatic rate'
+
+  p_transmission_asymptomatic_given_no_masks
+    Label: 'Asymptomatic transmission rate (no mask)'
+
+  p_transmission_presymptomatic_given_no_masks
+    Label: 'Pre-symptomatic transmission rate (no mask)'
+
+  p_transmission_symptomatic_given_no_masks
+    Label: 'Symptomatic transmission rate (no mask)'
+    
+  p_test_given_call
+    Label: 'Testing rate with call'
+
+  p_test_baseline
+    Label: 'Baseline testing rate'
+
+  p_test_given_notification
+    Label: 'Testing rate with EN'
+
+  p_test_given_symptomatic
+    Label: 'Testing rate with symptoms'
+
+  test_delay_sigma
+    Label: 'Testing delay standard deviation'
+
+  daily_test_capacity
+    Label: 'Daily Test Capacity'
+
+  p_positive_test_given_exposed 
+    Label: 'Positivity rate with exposure'
+
+  p_positive_test_given_presymptomatic
+    Label: 'Pre-symptomatic positivity rate'
+
+  p_positive_test_given_symptomatic
+    Label: 'Symptomatic positivity rate'
+
+  p_positive_test_given_asymptomatic
+    Label: 'Asymptomatic positivity rate'
+
+  p_upload_key_given_positive_test
+    Label: 'Key upload rate with positivity'
+
+  p_successful_call_unanticipated
+    Label: 'Successful call (unanticipated)'
+
+  p_successful_call_anticipated
+    Label: 'Successful call (anticipated)'
+
+  p_identify_individual_using_manual_contact_tracing
+    Label: 'Contact tracing identification rate'
+
+  max_contacts_recalled
+    Label: 'Max contacts recalled'
+
+  work_day_length
+    Label: 'Work day length'
+
+  max_call_attempts
+    Label: 'Max call attempts'
+
+  missed_call_time
+    Label: 'Missed call time'
+
+  index_trace_call_time
+    Label: 'Index case call time'
+
+  alert_call_time
+    Label: 'Close contact alert call time'
+
+  key_upload_call_time
+    Label: 'EN key upload call time'
+
+  p_start_max
+    Label: 'Start maximal rate'
+
+  p_mask_given_max
+    Label: 'Maximal restriction Mask rate'
+
+  mask_effect
+    Label: 'Mask effectiveness'
+
+  p_contact_public_health_after_positive_test
+    Label: 'Public Health call rate after positive'
+
+  p_contact_public_health_after_aen_notification
+    Label: 'Public Health call rate after EN'
+
+  mean_new_cases_maximal
+    Label: 'New cases mean maximal'
+
+  sigma_new_cases_maximal
+    Label: 'New cases standard deviation maximal'
+
+  p_starting_behavior_after_negative_test_no_symptoms
+    Label: 'Starting behavior return rate'
+
+  p_maximal_restriction_given_symptomatic
+    Label: 'Maximal restriction rate given symptomatic'
+  
+  p_maximal_restriction_given_positive_test
+    Label: 'Maximal restriction rate given positive test'
+  
+  p_maximal_restriction_given_ph_call
+    Label: 'Maximal restriction rate given PH call'
+  
+  p_maximal_restriction_given_aen_notification
+    Label: 'Maximal restriction rate given EN'
+
+  vaccinated_people_can_spread_asymptomatically
+    Label: 'Vaccinated can spread asymptomatically'

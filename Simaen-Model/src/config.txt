@@ -1,0 +1,181 @@
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+
+# This material is based upon work supported under Air Force Contract No. FA8702-15-D-0001.
+# Any opinions,findings, conclusions or recommendations expressed in this material are those
+# of the author(s) and do not necessarily reflect the views of the Centers for Disease Control.
+
+# (c) 2020 Massachusetts Institute of Technology.
+
+# The software/firmware is provided to you on an As-Is basis
+
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013
+# or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work
+# are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work
+# other than as specifically authorized by the U.S. Government may violate any copyrights that
+# exist in this work.
+
+# Copyright (c) 2020 Massachusetts Institute of Technology
+# SPDX short identifier: MIT
+
+# Developed as part of: SimAEN, 2020
+# Authors: DI25756, JO26228, ED22162
+# Default values for properties of the region
+
+##### STARTING CONDITIONS #####
+num_worlds = 1
+# The number of cases at the start of the simulation
+starting_cases = 20
+
+##### STOPPING CONDITIONS #####
+# Number of days that the simulation lasts
+end_day = 60
+# Maximum number of current cases before program stops
+max_num_current_cases = 1500000
+
+##### DISEASE PROPERTIES #####
+# The mean time between an individual being exposed and them becoming infectious (Lit)
+mean_latent_period = 2
+# The standard deviation of latent period (Lit)
+sd_latent_period = 0.7
+# The mean time between an individual being exposed and them becoming clinical (Lit)
+mean_incubation_period = 6
+# The standard deviation of incubation period (Lit)
+sd_incubation_period = 2.3
+# Number of days it takes to be sure of recovery from infection (Lit)
+recovery_length = 17
+# The likelyhood an infected person will be asymptomatic (Lit)
+p_asymptomatic_rate = 0.73
+# The probability that a true contact event involving an infected person will result in infection (Lit)
+p_transmission_asymptomatic_given_no_masks = 0.03
+p_transmission_presymptomatic_given_no_masks = 0.03
+p_transmission_symptomatic_given_no_masks = 0.07
+
+##### TESTING PARAMETERS #####
+# The probability that a person who has been called by public health will get tested on any given day
+p_test_given_call = 0.5
+# The probability that a person who has no symptomes and has not been notified in any way will get a test
+p_test_baseline = 0.01
+# The probability that a person who has received a notification through the app will get tested on any given day
+p_test_given_notification = 0.3
+# The probability that a person who is symptomatic will get tested on any given day
+p_test_given_symptomatic = 0.5
+# The mean and standard deviation of number of days that it takes for a test to get back (normal distribution)
+test_delay = 4
+test_delay_sigma = 1
+daily_test_capacity = 0
+
+##### PROBABILITY OF (+) TEST #####
+# The probability that a person who have been exposed will test positive
+p_positive_test_given_exposed = 0.5
+# The probability that someone who is presymptomatic will test positive
+p_positive_test_given_presymptomatic = 0.75
+# The probability that someone who is symptomatic will test positive
+p_positive_test_given_symptomatic = 0.9
+# The probability that someone who is asymptomatic will test positive
+p_positive_test_given_asymptomatic = 0.9
+
+##### APP PARAMETERS #####
+# The probability that a person is running the app
+p_running_app = 0.1
+# The probability that a close contact running the app will successfully handshake with their generator (given the generator is also running the app)
+p_app_detects_generator = 0.9
+# The probability that a person who is running the app who gets a positive test will upload their key to public health
+p_upload_key_given_positive_test = 0.9
+# The False Discovery Rate (FDR), used to create additional false positives picked up automatically by the system. 0.5 will equal new cases.
+false_discovery_rate = 0.25
+# Is an individual required to be contacted by public health before key upload? (1 = Yes)
+key_upload_requires_call = 1
+
+##### MCT PARAMETERS #####
+# The probability that a call from public health will reach a person identified through contact tracing
+p_successful_call_unanticipated = 0.5
+# The probability that a call from public health will reach a person expecting the call
+p_successful_call_anticipated = 0.75
+# The probability that an individual will be found using manual contact tracing
+p_identify_individual_using_manual_contact_tracing = 0.1
+# The maximum number of people an agent can recall through MCT on a single phone call
+max_contacts_recalled = 10
+# The number of contact tracers
+n_contact_tracers = 100
+# The number of hours each contact tracer can spend on calling in a day
+work_day_length = 8
+# The number of time PH will try to contact an individual before giving up
+max_call_attempts = 3
+# The length of time that a missed call takes (in hours)
+missed_call_time = 0.05
+# The length of time that a contact tracer takes to perform contact tracing on an index case (in hours)
+index_trace_call_time = 1
+# The length of time that a "heads-up" call takes (in hours)
+alert_call_time = 0.1
+# The length of time it takes for a call to upload key (in hours)
+key_upload_call_time = 0.1
+
+##### STARTING BEHAVIOR #####
+# The probability that a newly initialized individual will start in the...
+# ...minimal restriction state
+p_start_min = 0.0
+# ...moderate restriction state
+p_start_mod = 0.0
+# ...maximal restriction state
+p_start_max = 0.0
+
+##### MASK PARAMETERS #####
+# The probability that a person will wear a mask while they are in the...
+# ...normal state
+p_mask_given_norm = 0.5
+# ...minimal restriction state
+p_mask_given_min = 0.75
+# ...moderate restriction state
+p_mask_given_mod = 0.75
+# ...maximal restriction state
+p_mask_given_max = 0.9
+# How much p_transmission_given_no_masks is proportionally reduced for each person wearing a mask (higher numbers mean less transmission risk)
+mask_effect = 0.65
+
+##### PERSONAL PARAMETERS #####
+# The probability that a person will call public health after a positive test
+p_contact_public_health_after_positive_test = 0.75
+# The probability that a person will call public health after receiving an AEN notificaiton
+p_contact_public_health_after_AEN_notification = 0.5
+# Total number of people that the person will ever interact with
+mean_total_contacts = 2.2
+sigma_total_contacts = 1.1
+# The average number of contacts that an individual encounters each day....
+# ...if they take no precautions
+mean_new_cases = 1.7
+sigma_new_cases = 0.9
+# ...if they social distancing / being cautious
+mean_new_cases_minimal = 0.1
+sigma_new_cases_minimal = 0.1
+# ...after entering self-quarantine 
+mean_new_cases_moderate = 0.1
+sigma_new_cases_moderate = 0.1
+# ...after after entering self-isolation
+mean_new_cases_maximal = 0.1
+sigma_new_cases_maximal = 0.1
+# Probability of returning to starting behavior given negative test result and no symptoms
+p_starting_behavior_after_negative_test_no_symptoms = 0.85
+
+##### PERSONAL BEHAVIOR #####
+# Probabilities associated with entering various levels of restricted movement given the person is symptomatic
+p_maximal_restriction_given_symptomatic       = 0.9
+p_moderate_restriction_given_symptomatic      = 0
+p_minimal_restriction_given_symptomatic       = 0
+# Probabilities associated with entering various levels of restricted movement given the person receives a positive test
+p_maximal_restriction_given_positive_test     = 0.9
+p_moderate_restriction_given_positive_test    = 0
+p_minimal_restriction_given_positive_test     = 0
+# Probabilities associated with entering various levels of restricted movement given the person is successfully called by PH
+p_maximal_restriction_given_PH_call           = 0.75
+p_moderate_restriction_given_PH_call          = 0
+p_minimal_restriction_given_PH_call           = 0
+# Probabilities associated with entering various levels of restricted movement given the person is notified by AEN
+p_maximal_restriction_given_AEN_notification  = 0.5
+p_moderate_restriction_given_AEN_notification = 0
+p_minimal_restriction_given_AEN_notification  = 0
+
+##### VACCINATION PARAMETERS #####
+# The probability that a person is vaccinated
+p_vaccinated = 0
+# Do vaccinated individuals spread disease asymptomatically? (1 = Yes)
+vaccinated_people_can_spread_asymptomatically = 0

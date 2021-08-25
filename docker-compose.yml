@@ -5,7 +5,7 @@ services:
   web:
     restart: unless-stopped
     container_name: simaen-web
-    hostname: etdabdevhp023.lab.local
+    hostname: server-host-name #server host name
     build:
       context: ./simaen-web/
       #target: dev
