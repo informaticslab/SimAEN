@@ -1,0 +1,143 @@
+#!/usr/bin/env groovy
+
+/*
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+
+# This material is based upon work supported under Air Force Contract No. FA8702-15-D-0001.
+# Any opinions,findings, conclusions or recommendations expressed in this material are those
+# of the author(s) and do not necessarily reflect the views of the Centers for Disease Control.
+
+# (c) 2021 Massachusetts Institute of Technology.
+
+# The software/firmware is provided to you on an As-Is basis
+
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013
+# or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work
+# are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work
+# other than as specifically authorized by the U.S. Government may violate any copyrights that
+# exist in this work.
+
+# Copyright (c) 2021 Massachusetts Institute of Technology
+# SPDX short identifier: MIT
+
+# Developed as part of: SimAEN, 2021
+*/
+
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+    environment {
+        http_proxy = 'http://llproxy.llan.ll.mit.edu:8080'
+        https_proxy = 'http://llproxy.llan.ll.mit.edu:8080'
+        DEBIAN_FRONTEND = 'noninteractive'
+        GIT_COMMITTER_EMAIL = """${sh(
+            script: "git --no-pager show -s --format='%ae'",
+            returnStdout: true
+            ).trim()}"""        
+    }
+    stages {
+        stage('debug') {
+            steps {
+                sh 'printenv'
+            }
+        }
+        stage('pip check') {
+            steps {
+                checkout scm
+                withPythonEnv('python3') {
+                    sh 'pip3 install -r requirements.txt'
+                }
+            }
+        }
+        stage('test') {
+            when {
+                expression { false }  //disable this stage temporarily
+            }
+            steps {
+                withPythonEnv('python3') {
+                    dir("python") {
+                        sh 'pytest'
+                    }
+                }
+            }
+        }
+        stage('deploy master to dev') {
+            when { branch 'master' }
+            steps {
+                sshagent (credentials: ['g21jenkins']) {
+                    sh 'rsync -avh -e "ssh -o StrictHostKeyChecking=no" --delete --no-owner --no-group --exclude=.git --exclude=.pyenv-python3 --exclude=postgres.json --exclude=logs --exclude=__pycache__ --rsync-path="sudo rsync" ./ g21jenkins@cdc-simaen.llan.ll.mit.edu:/opt/simaen-api/'
+                    sh 'ssh g21jenkins@cdc-simaen.llan.ll.mit.edu "sudo su - simaen -c \'cd /opt/simaen-api/ && ./setup.sh\' " '
+                    sh 'ssh g21jenkins@cdc-simaen.llan.ll.mit.edu "sudo systemctl restart simaen-api.service" '
+                }
+            }
+        }
+        stage('deploy tag to prod') {
+            when {
+		anyOf {
+                        //branch 'jenkins'
+			tag pattern: "^[0-9]\\d*\\.\\d+\\.\\d+\$", comparator: "REGEXP"
+                } 
+            }
+            steps {
+                sshagent (credentials: ['g21jenkins']) {
+                    sh 'rsync -avh -e "ssh -o StrictHostKeyChecking=no" --delete --no-owner --no-group --exclude=.git --exclude=.pyenv-python3 --exclude=postgres.json --exclude=logs --exclude=__pycache__ --rsync-path="sudo rsync" ./ g21jenkins@cdc-simaen.hadr.ll.mit.edu:/opt/simaen-api/'
+                    sh 'ssh g21jenkins@cdc-simaen.hadr.ll.mit.edu "sudo su - simaen -c \'cd /opt/simaen-api/ && ./setup.sh\' " '
+                    sh 'ssh g21jenkins@cdc-simaen.hadr.ll.mit.edu "sudo systemctl restart simaen-api.service" '
+                }
+            }
+        }
+        stage('build Dockerfile') {
+            when {
+		anyOf {
+                        //branch 'master'
+			tag pattern: "^[0-9]\\d*\\.\\d+\\.\\d+\$", comparator: "REGEXP"
+                } 
+            }
+            steps {
+                script {
+                   docker.build ("simaen-api:${env.GIT_BRANCH}", "--label 'GIT_COMMIT=${env.GIT_COMMIT}' .")
+                }
+            }
+        }
+        stage('scan docker image') {
+            when {
+		anyOf {
+                        //branch 'master'
+			tag pattern: "^[0-9]\\d*\\.\\d+\\.\\d+\$", comparator: "REGEXP"
+                } 
+            }
+            steps {
+                // Scan the image
+                prismaCloudScanImage ca: '',
+                cert: '',
+                dockerAddress: 'unix:///var/run/docker.sock',
+                image: "simaen-api:${env.GIT_BRANCH}",
+                key: '',
+                logLevel: 'debug',
+                podmanPath: '',
+                project: '',
+                resultsFile: 'prisma-cloud-scan-results.json',
+                ignoreImageBuildTime:true
+                prismaCloudPublish resultsFilePattern: 'prisma-cloud-scan-results.json'
+            }
+        }
+    }
+    post {
+        failure {
+            script {                    
+                if ( env.BRANCH_NAME == 'master' || env.BRANCH_NAME ==~ "^[0-9]\\d*\\.\\d+\\.\\d+\$" ) {
+                    mail to: "simaen-support@ll.mit.edu",
+                    subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                    body: "Build Failed ${env.RUN_DISPLAY_URL}"
+                } else {
+                    mail to: "${env.GIT_COMMITTER_EMAIL}",
+                    subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                    body: "Build Failed ${env.RUN_DISPLAY_URL}"
+                }
+            }
+        }
+    }
+}

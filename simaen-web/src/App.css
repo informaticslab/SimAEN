@@ -1,0 +1,67 @@
+/*
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+
+# This material is based upon work supported under Air Force Contract No. FA8702-15-D-0001.
+# Any opinions,findings, conclusions or recommendations expressed in this material are those
+# of the author(s) and do not necessarily reflect the views of the Centers for Disease Control.
+
+# (c) 2021 Massachusetts Institute of Technology.
+
+# The software/firmware is provided to you on an As-Is basis
+
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013
+# or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work
+# are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work
+# other than as specifically authorized by the U.S. Government may violate any copyrights that
+# exist in this work.
+
+# Copyright (c) 2021 Massachusetts Institute of Technology
+# SPDX short identifier: MIT
+
+# Developed as part of: SimAEN, 2021
+*/
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}

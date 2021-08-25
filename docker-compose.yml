@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+
+  web:
+    restart: unless-stopped
+    container_name: simaen-web
+    hostname: etdabdevhp023.lab.local
+    build:
+      context: ./simaen-web/
+      #target: dev
+      target: prod
+    ports:
+      # dev target
+      #- "8080:8080"
+      # prod target
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      # - "/sec/cert/:/etc/httpd/tls"
+      - "/sec/certs/simaen_2021.pem:/httpd-ssl/certs/simaen_2021.pem"
+      - "/sec/certs/simaen_2021.key:/httpd-ssl/private/simaen_2021.key"
+      # - "./simaen-web/ssl.conf:/etc/httpd/conf.d/ssl.conf"
+    environment:
+      PORT: 8080 # used only for dev target
+      REACT_APP_API_URL: https://simaen.philab.cdc.gov/api # must be fqdn of website to api
+    depends_on:
+      - api
+
+  db:
+    restart: unless-stopped
+    container_name: simaen-db
+    hostname: simaen-db
+    image: postgres:13-buster
+    ports:
+      # not required for prod or dev, only required to connect from host/other
+      - "5432:5432"
+    volumes:
+      - "simaen-db-pgdata:/var/lib/postgresql/data"
+      - "./simaen-api/schema.sql:/docker-entrypoint-initdb.d/1-simaen-db-schema.sql:ro"
+      - "./simaen-db/simaen-db-data.sql.gz:/docker-entrypoint-initdb.d/2-simaen-db-data.sql.gz:ro"
+    environment:
+      POSTGRES_DB: simaen
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: simaen
+
+  api:
+    restart: unless-stopped
+    container_name: simaen-api
+    hostname: simaen-api
+    build: ./simaen-api/
+    ports:
+     - "5000:5000"
+    environment:
+      PORT: 5000
+    volumes:
+      - "./simaen-db/postgres.json:/opt/simaen-api/simaen_api/postgres.json:ro"
+    depends_on:
+       - db
+
+volumes:
+  simaen-db-pgdata:
+
+
+    
