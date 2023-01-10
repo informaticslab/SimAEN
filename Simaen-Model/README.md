@@ -27,7 +27,7 @@
   <p align="center">
     An agent-based model of the public health workflow for exploring the effects of disease mitigation strategies
     <br />
-    <a href="https://arxiv.org/abs/2012.04399"><strong>Read the paper »</strong></a>
+    <a href="https://journals.sagepub.com/doi/full/10.1177/00333549221116361"><strong>Read the paper in PHR»</strong></a>
     <br />
   </p>
 </p>

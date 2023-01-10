@@ -317,13 +317,13 @@ incorporates data from laboratory performance testing of EN, peer-reviewed resea
             <Typography align="center" variant="h4" className={classes.subtitle}>Supporting Information</Typography>
 	    <br/>
             <Typography align="center" variant="h6">
-              <Link href="https://arxiv.org/abs/2012.04399" target="_blank">
-                Read the SimAEN white paper
+              <Link href="https://www.ll.mit.edu/sites/default/files/publication/doc/simulation-automated-exposure-notification-(simaen)-schuldt-acta-5.pdf" target="_blank">
+                Read the SimAEN project report
               </Link>
             </Typography>
 
             <Typography align="center" variant="h6">
-              <Link href="https://cdc.gov/404" target="_blank">
+              <Link href="https://github.com/informaticslab/SimAEN" target="_blank">
                 Download the SimAEN source code
               </Link>
             </Typography>
