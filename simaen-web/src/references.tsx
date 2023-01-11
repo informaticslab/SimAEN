@@ -31,13 +31,21 @@ export type LitReference = {
 };
 
 export const references = {
-  simaen_whitepaper: {
-    Authors: "Londner T., Saunders J., Schuldt D. W., Streilein B.",
-    Title: "Simulation Automated Exposure Notification (SimAEN): Exploring the Effects of Interventions on the Spread of COVID",
-    Date: "2020, December 8",
-    Publication: "arXiv",
-    Href: "https://arxiv.org/abs/2012.04399",
-    LinkText: "https://arxiv.org/abs/2012.04399",
+  simaen_phr: {
+    Authors: "Streilein B., Finklea L., Schuldt D., Schiefelbein, M. C., Yahalom R., Ali H., Norige A.",
+    Title: "Evaluating COVID-19 Exposure Notification Effectiveness With SimAEN: A Simulation Tool Designed for Public Health Decision Making",
+    Date: "2022, August 30",
+    Publication: "Public Health Reports",
+    Href: "https://journals.sagepub.com/doi/full/10.1177/00333549221116361",
+    LinkText: "https://journals.sagepub.com/doi/full/10.1177/00333549221116361",
+  },
+  simaen_report: {
+    Authors: "Schuldt D. W., Londner T., Saunders J., Norige A., Schiefelbein C., Yahalom R., Streilein W.",
+    Title: "The Simulation of Automated Exposure Notification (SimAEN) Model",
+    Date: "2022, April 15",
+    Publication: "MIT Lincoln Laboratory",
+    Href: "https://www.ll.mit.edu/sites/default/files/publication/doc/simulation-automated-exposure-notification-(simaen)-schuldt-acta-5.pdf,
+    LinkText: "https://www.ll.mit.edu/sites/default/files/publication/doc/simulation-automated-exposure-notification-(simaen)-schuldt-acta-5.pdf",
   },
 
   briers: {

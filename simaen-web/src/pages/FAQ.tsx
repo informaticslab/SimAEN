@@ -173,10 +173,10 @@ No. SimAEN is not designed to be a predictive model for long term spread of infe
             <Card className={classes.card}>
               <CardContent>
                 <Typography className={classes.question} gutterBottom>
-                  I downloaded the whitepaper, but I don't understand how the web interface variables map to the variables in the paper. Help!
+                  I downloaded the report, but I don't understand how the web interface variables map to the variables in the paper. Help!
                 </Typography>
                 <Typography className={classes.answer} gutterBottom>
-                  We have provided a mapping of variable names from the model code to user-friendly labels in the <Link underline='always' color="inherit" href="https://cdc.gov/404" target="_blank">model source code.</Link>
+                  We have provided a mapping of variable names from the model code to user-friendly labels in the <Link underline='always' color="inherit" href="https://github.com/informaticslab/SimAEN/blob/main/Simaen-Model/parameter_name_mapping.txt" target="_blank">model source code.</Link>
                 </Typography>
               </CardContent>
             </Card>

@@ -176,9 +176,9 @@ export default function ModelDetails(props: propsType) {
                 </Typography>
 		<Typography variant="body1" component="span" paragraph className={classes.explanation}>
 		  <ul>
-		    <li>For more details on model design, see <NiceLink href="https://arxiv.org/abs/2012.04399" text="the whitepaper on arXiv" />.</li>
+		    <li>For more details on model design, see <NiceLink href="https://www.ll.mit.edu/sites/default/files/publication/doc/simulation-automated-exposure-notification-(simaen)-schuldt-acta-5.pdf" text="the project report" />.</li>
 		    <li>For more details on model parameters, settings, and references, see the <Link to="/glossary" color="inherit" variant="body1" underline="always" component={RouterLink}>Glossary</Link>.</li>
-		    <li><NiceLink href="http://www.cdc.gov/404" text="Download the model code" />.</li>
+		    <li><NiceLink href="https://github.com/informaticslab/SimAEN" text="Download the model code" />.</li>
 		  </ul>
                 </Typography>
               </CardContent>
@@ -239,7 +239,7 @@ The model includes several feedback loops. Positive (amplifying) effects are sho
                 />
 		<Typography variant="body1" component="span" paragraph className={classes.explanation}>
 		<ul>
-		  <li>For more performance and validation details, see <NiceLink href="https://arxiv.org/abs/2012.04399" text="the whitepaper on arXiv" />.</li>
+		  <li>For more performance and validation details, see see <NiceLink href="https://www.ll.mit.edu/sites/default/files/publication/doc/simulation-automated-exposure-notification-(simaen)-schuldt-acta-5.pdf" text="the project report" />.</li>
 		  <li>For MIT LL BLE datasets, see the <NiceLink href="https://github.com/mitll/PACT" text="github repository"/>.</li>
 		</ul>
                 </Typography>
@@ -255,7 +255,8 @@ The model includes several feedback loops. Positive (amplifying) effects are sho
 		<Typography variant="body1" component="span" paragraph className={classes.explanation} id="references">
 		  <ol>		
 		    <li><NiceLink href="https://www.google.com/covid19/exposurenotifications/" text="Google|Apple Exposure Notifcation Specifications" /> </li>
-		    <li>{formatReference(references.simaen_whitepaper)}</li>
+		    <li>{formatReference(references.simaen_phr)}</li>
+		    <li>{formatReference(references.simaen_report)}</li>
 		    <li>{formatReference(references.briers)}</li>
 		    <li>{formatReference(references.pluss)}</li>
 		    <li>{formatReference(references.pierlinck)}</li>

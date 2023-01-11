@@ -62,6 +62,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more about the SimAEN web tool in the User Guide (simaen-web/public/SimAEN_User_Guide_Quick_Start.pdf in this repository). The SimAEN whitepaper is currently available at (https://arxiv.org/abs/2012.04399).
+You can learn more about the SimAEN web tool in the User Guide (simaen-web/public/SimAEN_User_Guide_Quick_Start.pdf in this repository). The SimAEN project report is available at (https://www.ll.mit.edu/r-d/publications/simulation-automated-exposure-notification-simaen-model).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
